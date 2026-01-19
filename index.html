@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daymix’s Planet.Io - User Agreement</title>
+    <style>
+        :root {
+            --bg-color: #1e293b; /* Тёмно-синий сероватый */
+            --card-bg: #334155;
+            --text-color: #e2e8f0;
+            --accent-color: #38bdf8; /* Голубой */
+            --scrollbar-track: #0f172a;
+            --scrollbar-thumb: #475569;
+            --scrollbar-thumb-hover: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh; /* На всю высоту экрана */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Скрываем скролл самого окна браузера */
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px;
+            background-color: rgba(15, 23, 42, 0.9);
+            display: flex;
+            justify-content: center; /* Кнопки по центру */
+            gap: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(56, 189, 248, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: var(--accent-color);
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            flex: 1; /* Занимает всё доступное место */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden; /* Важно для внутреннего скролла */
+        }
+
+        .eula-card {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 1000px;
+            height: 100%;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #475569;
+        }
+
+        .eula-title {
+            padding: 20px 30px;
+            border-bottom: 2px solid #475569;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        .subtitle {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            opacity: 0.8;
+        }
+
+        /* --- SCROLLABLE AREA --- */
+        .text-scroll-area {
+            flex: 1;
+            overflow-y: auto; /* Включаем вертикальный скролл */
+            padding: 20px 40px;
+            font-size: 1.1rem; /* Крупный текст */
+            line-height: 1.8;
+            text-align: justify;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .text-scroll-area h3 {
+            color: #fff;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        .text-scroll-area p {
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        /* Кастомный скроллбар */
+        .text-scroll-area::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .text-scroll-area::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 0;
+        }
+
+        .text-scroll-area::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--scrollbar-thumb), var(--accent-color));
+            border-radius: 6px;
+            border: 3px solid var(--scrollbar-track);
+        }
+
+        .text-scroll-area::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* --- FOOTER --- */
+        .footer-panel {
+            padding: 20px 30px;
+            background-color: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid #475569;
+            border-radius: 0 0 15px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .scroll-hint {
+            color: #fca5a5; /* Красный оттенок */
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            pointer-events: none; /* Блокируем клики */
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .checkbox-container.unlocked {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: pointer;
+            border: 1px solid var(--accent-color);
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .contact-footer {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .contact-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="lang-btn active" onclick="setLanguage('en')">English</button>
+        <button class="lang-btn" onclick="setLanguage('ru')">Русский</button>
+    </header>
+
+    <main>
+        <div class="eula-card">
+            <div class="eula-title">
+                <h1 id="gameTitle">Daymix’s Planet.Io</h1>
+                <div class="subtitle" id="subtitle">End User License Agreement (EULA)</div>
+            </div>
+
+            <!-- Область с текстом и скроллом -->
+            <div class="text-scroll-area" id="scrollContainer" onscroll="onScroll()">
+                <div id="contentBody">
+                    <!-- Текст вставляется через JS -->
+                </div>
+            </div>
+
+            <div class="footer-panel">
+                <div class="scroll-hint" id="scrollHint">▼ SCROLL TO THE END TO ACCEPT ▼</div>
+                
+                <div class="checkbox-container" id="checkboxContainer">
+                    <input type="checkbox" id="acceptCheckbox" onchange="toggleAgreement()">
+                    <label for="acceptCheckbox" id="acceptLabel">I confirm that I have read the terms and agree to them.</label>
+                </div>
+
+                <div class="contact-footer">
+                    Support / Contact: <a href="mailto:mineprhap777@mail.ru">mineprhap777@mail.ru</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- ДАННЫЕ С ТЕКСТОМ (Много текста, чтобы EULA выглядела серьезно) ---
+        const texts = {
+            en: {
+                subtitle: "End User License Agreement (EULA)",
+                scrollHint: "▼ PLEASE SCROLL TO THE BOTTOM TO CONTINUE ▼",
+                acceptLabel: "I acknowledge that I have read, understood, and agree to be bound by these terms.",
+                content: `
+                    <h3>1. PREAMBLE AND DEFINITIONS</h3>
+                    <p>1.1. This End User License Agreement ("EULA") constitutes a legally binding agreement between you (hereinafter referred to as the "User") and the creator of the software product "Daymix’s Planet.Io" (hereinafter referred to as the "Author" or "Licensor").</p>
+                    <p>1.2. By accessing, downloading, installing, launching in a browser, or otherwise using "Daymix’s Planet.Io" (hereinafter referred to as the "Game"), you acknowledge that you have read this Agreement, understand it, and agree to be bound by its terms.</p>
+                    
+                    <h3>2. ACCEPTANCE OF TERMS</h3>
+                    <p>2.1. <strong>Moment of Acceptance:</strong> The act of launching the Game in a web browser, accessing its repository on GitHub, or downloading any associated files constitutes your full, unconditional, and irrevocable acceptance of this EULA.</p>
+                    <p>2.2. If you do not agree to the terms of this EULA, you must immediately cease all use of the Game, close the browser tab containing the Game, and delete any downloaded files associated with the Game from your devices.</p>
+
+                    <h3>3. INTELLECTUAL PROPERTY RIGHTS</h3>
+                    <p>3.1. The Game, including but not limited to its source code, scripts, graphical assets, audio files, design, structure, and organization, is the exclusive intellectual property of the Author.</p>
+                    <p>3.2. Access to the source code via public repositories (e.g., GitHub) is provided solely for educational or demonstration purposes and does not imply a transfer of ownership or intellectual property rights to the User.</p>
+                    <p>3.3. <strong>Prohibition on Modification:</strong> You are strictly prohibited from modifying, adapting, translating, or creating derivative works based on the Game's source code or assets. Decompilation, reverse engineering, disassembly, or any attempt to derive the source code (except where such code is intentionally made public by the Author) is strictly prohibited.</p>
+
+                    <h3>4. LICENSE GRANT AND RESTRICTIONS</h3>
+                    <p>4.1. <strong>Personal Use Only:</strong> The Author grants you a revocable, non-exclusive, non-transferable, limited license to use the Game solely for your personal, non-commercial entertainment purposes.</p>
+                    <p>4.2. <strong>Commercial Prohibition:</strong> You may not use the Game or any of its components for commercial purposes. This includes, but is not limited to: selling access to the Game, selling copies of the Game, incorporating the Game into a paid product, or wrapping the Game with advertisements for profit without a separate, written license agreement from the Author.</p>
+                    <p>4.3. <strong>Territory and Distribution:</strong> Hosting the Game on third-party websites, framing the Game (using iframe technology), or creating mirrors of the Game on other servers without express written consent from the Author is prohibited.</p>
+
+                    <h3>5. ASSETS AND AUTOMATION</h3>
+                    <p>5.1. <strong>Game Assets:</strong> All images, sounds, music, and text contained within the Game are protected by copyright. Extracting these assets for use in other projects, engines, or software is strictly prohibited.</p>
+                    <p>5.2. <strong>Prohibition on Automation (Bots):</strong> The use of third-party software, scripts, bots, clickers, or any automated tools to modify the Game experience, automate gameplay, or manipulate Game memory/variables within the browser environment is a material breach of this Agreement.</p>
+
+                    <h3>6. DISCLAIMER OF WARRANTIES</h3>
+                    <p>6.1. THE GAME IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.</p>
+                    <p>6.2. The Author specifically disclaims the warranties of merchantability, fitness for a particular purpose, title, and non-infringement. The Author does not warrant that the Game will meet your requirements or that the operation of the Game will be uninterrupted or error-free.</p>
+                    <p>6.3. <strong>Stability:</strong> As the Game is hosted on a third-party platform (GitHub Pages), the Author makes no guarantees regarding the 24/7 availability of the Game and bears no responsibility for technical failures, downtime, or data loss occurring on the side of the hosting provider.</p>
+
+                    <h3>7. UPDATES AND ACCESS</h3>
+                    <p>7.1. <strong>Updates:</strong> The Author reserves the right to modify this EULA at any time. Continued use of the Game following any changes to this Agreement constitutes your acceptance of those changes.</p>
+                    <p>7.2. <strong>Termination:</strong> The Author reserves the right to terminate access to the Game, remove the repository, or take the Game offline at any time, for any reason, without prior notice or liability.</p>
+
+                    <h3>8. PRIVACY AND DATA</h3>
+                    <p>8.1. The Game is a client-side HTML application. The Author does not knowingly collect, store, or process personal data of Users.</p>
+                    <p>8.2. However, the User acknowledges that the hosting provider (GitHub) may collect technical logs (IP addresses, user agents) and use technical cookies in accordance with their own Privacy Policy, over which the Author has no control.</p>
+
+                    <h3>9. MISCELLANEOUS</h3>
+                    <p>9.1. <strong>Age Restrictions:</strong> By using the Game, you represent that you are of legal age to enter into this Agreement or are using the Game under the supervision of a parent or legal guardian.</p>
+                    <p>9.2. <strong>Feedback:</strong> Any ideas, suggestions, bug reports, or feedback submitted to the Author regarding the Game shall become the sole property of the Author. The Author is entitled to use such feedback for any purpose without compensation to the User.</p>
+                    <p>9.3. <strong>Dispute Resolution:</strong> All disputes arising from or in connection with this Agreement shall be resolved through amicable negotiations via email contact (mineprhap777@mail.ru). If a resolution cannot be reached, the dispute shall be settled in accordance with the laws of the jurisdiction where the Author resides.</p>
+                    
+                    <p style="text-align: center; color: #64748b; margin-top: 50px;">--- END OF DOCUMENT ---</p>
+                    <div style="height: 50px;"></div>
+                `
+            },
+            ru: {
+                subtitle: "Пользовательское соглашение (EULA)",
+                scrollHint: "▼ ПРОЛИСТАЙТЕ ВНИЗ ДЛЯ ПРИНЯТИЯ ▼",
+                acceptLabel: "Я подтверждаю, что прочитал условия и согласен с ними.",
+                content: `
+                    <h3>1. ПРЕАМБУЛА И ОПРЕДЕЛЕНИЯ</h3>
+                    <p>1.1. Настоящее Лицензионное соглашение с конечным пользователем (далее — «EULA» или «Соглашение») является юридически обязательным договором между Вами (далее — «Пользователь») и автором программного продукта «Daymix’s Planet.Io» (далее — «Автор»).</p>
+                    <p>1.2. Получая доступ к игре, загружая её, запуская в браузере или используя любым иным способом «Daymix’s Planet.Io» (далее — «Игра»), Вы подтверждаете, что прочитали настоящее Соглашение, поняли его смысл и соглашаетесь соблюдать его условия.</p>
+                    
+                    <h3>2. МОМЕНТ ПРИНЯТИЯ СОГЛАШЕНИЯ</h3>
+                    <p>2.1. <strong>Акцепт оферты:</strong> Факт использования Игры, её запуск в веб-браузере или скачивание файлов с репозитория GitHub автоматически означает полное и безоговорочное согласие Пользователя с данным документом.</p>
+                    <p>2.2. Если Вы не согласны с условиями настоящего Соглашения, Вы обязаны немедленно прекратить использование Игры, закрыть вкладку браузера и удалить любые сохраненные файлы Игры со своих устройств.</p>
+
+                    <h3>3. ИНТЕЛЛЕКТУАЛЬНАЯ СОБСТВЕННОСТЬ</h3>
+                    <p>3.1. Игра, включая, но не ограничиваясь исходным кодом, скриптами, графическими ресурсами, звуковыми файлами, дизайном и структурой, является исключительной интеллектуальной собственностью Автора.</p>
+                    <p>3.2. Доступ к исходному коду через публичные репозитории (например, GitHub) предоставляется исключительно в ознакомительных целях и не означает передачу прав на его коммерческое использование, модификацию или распространение.</p>
+                    <p>3.3. <strong>Запрет на модификацию:</strong> Строго запрещается любое изменение исходного кода Игры, её ресурсов (изображений, звуков), скриптов и файлов данных. Декомпиляция, реверс-инжиниринг, дизассемблирование и создание производных произведений на основе кода Игры запрещены и расцениваются как нарушение авторских прав.</p>
+
+                    <h3>4. ЛИЦЕНЗИЯ И ОГРАНИЧЕНИЯ</h3>
+                    <p>4.1. <strong>Личное использование:</strong> Автор предоставляет Вам ограниченную, неисключительную, отзывную лицензию на использование Игры исключительно в личных некоммерческих целях.</p>
+                    <p>4.2. <strong>Запрет на коммерцию:</strong> Использование Игры в коммерческих целях (например, продажа доступа, встраивание платной рекламы вокруг Игры, использование элементов Игры в платных продуктах) категорически запрещено без отдельного письменного лицензионного договора с Автором.</p>
+                    <p>4.3. <strong>Территория и дистрибуция:</strong> Размещение Игры на сторонних веб-сайтах, использование технологии фреймов (iframe) или создание зеркал Игры без письменного согласия Автора запрещено.</p>
+
+                    <h3>5. ИГРОВЫЕ АКТИВЫ И АВТОМАТИЗАЦИЯ</h3>
+                    <p>5.1. <strong>Использование ассетов:</strong> Графические материалы, музыка и звуковые эффекты являются интеллектуальной собственностью и не подлежат извлечению из кода Игры для использования в других проектах.</p>
+                    <p>5.2. <strong>Запрет на ботов:</strong> Любое использование скриптов, ботов, кликеров или стороннего ПО для автоматизации игрового процесса, а также изменение параметров Игры в памяти браузера считается грубым нарушением условий.</p>
+
+                    <h3>6. ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ</h3>
+                    <p>6.1. ИГРА ПРЕДОСТАВЛЯЕТСЯ ПО ПРИНЦИПУ «КАК ЕСТЬ» (AS IS), БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, ЯВНЫХ ИЛИ ПОДРАЗУМЕВАЕМЫХ.</p>
+                    <p>6.2. Автор не несет ответственности за любой прямой, косвенный, случайный или иной ущерб, возникший в результате использования или невозможности использования Игры.</p>
+                    <p>6.3. <strong>Отсутствие гарантий стабильности:</strong> Поскольку Игра размещена на сторонней платформе (GitHub Pages), Автор не гарантирует постоянную доступность Игры 24/7 и не несет ответственности за технические сбои на стороне хостинг-провайдера.</p>
+
+                    <h3>7. ОБНОВЛЕНИЯ И ДОСТУП</h3>
+                    <p>7.1. <strong>Обновление условий:</strong> Автор имеет право изменять условия данного соглашения в любое время в одностороннем порядке. Продолжение использования Игры после внесения изменений означает их принятие.</p>
+                    <p>7.2. <strong>Прекращение доступа:</strong> Автор оставляет за собой право в любой момент ограничить доступ к файлам Игры (удалить репозиторий или закрыть страницу) без предварительного уведомления.</p>
+
+                    <h3>8. КОНФИДЕНЦИАЛЬНОСТЬ</h3>
+                    <p>8.1. Игра является статическим HTML-приложением и не собирает персональные данные Пользователей.</p>
+                    <p>8.2. Пользователь осознает, что хостинг-провайдер (GitHub) может использовать технические файлы cookie или собирать логи доступа (IP-адреса) согласно своей политике конфиденциальности, на которую Автор не имеет влияния.</p>
+
+                    <h3>9. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h3>
+                    <p>9.1. <strong>Возрастные ограничения:</strong> Пользователь подтверждает достижение возраста, допустимого для игр данной категории, либо использует Игру под присмотром родителей/опекунов.</p>
+                    <p>9.2. <strong>Обратная связь:</strong> Любые идеи, отзывы или предложения, присланные Автору, не являются конфиденциальными и могут быть использованы Автором в разработке без выплаты вознаграждения.</p>
+                    <p>9.3. <strong>Разрешение споров:</strong> Все споры решаются путем переговоров по электронной почте, указанной ниже. При невозможности достижения согласия споры подлежат разрешению в соответствии с законодательством по месту нахождения правообладателя.</p>
+                    
+                    <p style="text-align: center; color: #64748b; margin-top: 50px;">--- КОНЕЦ ДОКУМЕНТА ---</p>
+                    <div style="height: 50px;"></div>
+                `
+            }
+        };
+
+        // --- ЛОГИКА ---
+        const scrollContainer = document.getElementById('scrollContainer');
+        const contentBody = document.getElementById('contentBody');
+        const checkboxContainer = document.getElementById('checkboxContainer');
+        const acceptCheckbox = document.getElementById('acceptCheckbox');
+        const scrollHint = document.getElementById('scrollHint');
+        let isScrolledToEnd = false;
+        let isAgreed = false;
+
+        function setLanguage(lang) {
+            // Обновляем текст
+            document.getElementById('subtitle').innerText = texts[lang].subtitle;
+            document.getElementById('scrollHint').innerText = texts[lang].scrollHint;
+            document.getElementById('acceptLabel').innerText = texts[lang].acceptLabel;
+            contentBody.innerHTML = texts[lang].content;
+
+            // Обновляем кнопки
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const btnIndex = lang === 'en' ? 0 : 1;
+            document.querySelectorAll('.lang-btn')[btnIndex].classList.add('active');
+
+            // Сбрасываем состояние
+            resetAgreement();
+        }
+
+        function resetAgreement() {
+            scrollContainer.scrollTop = 0;
+            isScrolledToEnd = false;
+            isAgreed = false;
+            acceptCheckbox.checked = false;
+            
+            // Блокируем чекбокс
+            checkboxContainer.classList.remove('unlocked');
+            scrollHint.style.display = 'block';
+        }
+
+        function onScroll() {
+            if (isScrolledToEnd) return;
+
+            // Проверяем, долистал ли пользователь до низа (с небольшим допуском в 5px)
+            const tolerance = 5;
+            if (scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - tolerance) {
+                unlockCheckbox();
+            }
+        }
+
+        function unlockCheckbox() {
+            isScrolledToEnd = true;
+            checkboxContainer.classList.add('unlocked');
+            scrollHint.style.display = 'none'; // Скрываем надпись "листай вниз"
+        }
+
+        function toggleAgreement() {
+            isAgreed = acceptCheckbox.checked;
+        }
+
+        // --- ЗАЩИТА ОТ ЗАКРЫТИЯ ---
+        window.addEventListener('beforeunload', function (e) {
+            if (!isAgreed) {
+                // Стандарт для современных браузеров (требует e.preventDefault())
+                e.preventDefault();
+                // Для старых браузеров
+                e.returnValue = ''; 
+                return '';
+            }
+        });
+
+        // Инициализация
+        setLanguage('en');
+
+    </script>
+</body>
+</html>
